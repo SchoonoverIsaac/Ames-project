@@ -30,7 +30,7 @@ public class PlayerShoot : MonoBehaviour
             //destination (mousePosition) - starting position (transform.position)
             Vector3 mouseDir = mousePos - transform.position;
             mouseDir.Normalize();
-            bullet.GetComponent<Rigidbody2D>().velocity = mouseDir * shootSpeed;
+            bullet.GetComponent<Rigidbody>().linearVelocity = mouseDir * shootSpeed;
             Destroy(bullet, bulletLifetime);
         }
     }

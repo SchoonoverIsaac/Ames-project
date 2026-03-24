@@ -1,19 +1,20 @@
 using UnityEngine;
 
 public class BasePlayerAttackCode : MonoBehaviour
+{
 public bool SpellMode = false;
 public bool BowMode = false;
 public bool SwordMode = true;
-public GameObject SwordSwing;
+public GameObject SwordPrefab;
 public float SwingSpeed = 0.1f;
 public float SwingLifetime = 2f;
-public GameObject Spellcast;
+public GameObject SpellcastPrefab;
 public float SpellTravelSpeed = 10f;
 public float SpellLifetime = 2f;
-public GameObject Arrow;
+public GameObject ArrowPrefab;
 public float shootSpeed = 10f;
 public float ArrowLifetime = 2f;
-{
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -52,30 +53,29 @@ public float ArrowLifetime = 2f;
                 Debug.Log(mousePos);
                 mousePos.z = 0;
                 //spawn a bullet
-                GameObject Spellcast = Instantiate(prefab, transform.position, Quaternion.identity);
+                GameObject bullet = Instantiate(SpellcastPrefab, transform.position, Quaternion.identity);
                 //push the bullet in the direction of the mouse
                 //destination (mousePosition) - starting position (transform.position)
                 Vector3 mouseDir = mousePos - transform.position;
                 mouseDir.Normalize();
-                Spellcast.GetComponent<Rigidbody2D>().velocity = mouseDir * SpellTravelSpeed;
-                Destroy(Spellcast, SpellLifetime);
+                bullet.GetComponent<Rigidbody>().linearVelocity = mouseDir * SpellTravelSpeed;
+                Destroy(bullet, SpellLifetime);
 
             }
             else if (BowMode)
             {
-                Debug.Log("Bow Attack");
                 Vector3 mousePos = Input.mousePosition;
                 mousePos = Camera.main.ScreenToWorldPoint(mousePos);
                 Debug.Log(mousePos);
                 mousePos.z = 0;
                 //spawn a bullet
-                GameObject Arrow = Instantiate(prefab, transform.position, Quaternion.identity);
+                GameObject bullet = Instantiate(ArrowPrefab, transform.position, Quaternion.identity);
                 //push the bullet in the direction of the mouse
                 //destination (mousePosition) - starting position (transform.position)
                 Vector3 mouseDir = mousePos - transform.position;
                 mouseDir.Normalize();
-                Arrow.GetComponent<Rigidbody2D>().velocity = mouseDir * shootSpeed;
-                Destroy(Arrow, ArrowLifetime);
+                bullet.GetComponent<Rigidbody>().linearVelocity = mouseDir * shootSpeed;
+                Destroy(bullet, SpellLifetime);
             }
             else if (SwordMode)
             {
@@ -85,13 +85,13 @@ public float ArrowLifetime = 2f;
                 Debug.Log(mousePos);
                 mousePos.z = 0;
                 //spawn a bullet
-                GameObject SwordSwing = Instantiate(prefab, transform.position, Quaternion.identity);
+                GameObject bullet = Instantiate(SwordPrefab, transform.position, Quaternion.identity);
                 //push the bullet in the direction of the mouse
                 //destination (mousePosition) - starting position (transform.position)
                 Vector3 mouseDir = mousePos - transform.position;
                 mouseDir.Normalize();
-                SwordSwing.GetComponent<Rigidbody2D>().velocity = mouseDir * SwingSpeed;
-                Destroy(SwordSwing, SwingLifetime);
+                bullet.GetComponent<Rigidbody>().linearVelocity = mouseDir * SwingSpeed;
+                Destroy(bullet, SwingLifetime);
             }
         }
     }
