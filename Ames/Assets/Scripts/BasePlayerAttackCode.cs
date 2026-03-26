@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BasePlayerAttackCode : MonoBehaviour
 {
@@ -20,80 +21,73 @@ public float ArrowLifetime = 2f;
     {
         
     }
+    public void OnToggle1(InputValue value)
+    {
+        //this function will run whenever the 1 key is presseed
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Debug.Log("Spell Attack");
+            Vector3 mousePos = Input.mousePosition;
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            Debug.Log(mousePos);
+            mousePos.z = 0;
+            //spawn a bullet
+            GameObject bullet = Instantiate(SpellcastPrefab, transform.position, Quaternion.identity);
+            //push the bullet in the direction of the mouse
+            //destination (mousePosition) - starting position (transform.position)
+            Vector3 mouseDir = mousePos - transform.position;
+            mouseDir.Normalize();
+            bullet.GetComponent<Rigidbody>().linearVelocity = mouseDir * SpellTravelSpeed;
+            Destroy(bullet, SpellLifetime);
+        }
+    }
 
+            
+    public void OnToggle2(InputValue value)
+    {
+        //this function will run whenever the 1 key is presseed
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Vector3 mousePos = Input.mousePosition;
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            Debug.Log(mousePos);
+            mousePos.z = 0;
+            //spawn a bullet
+            GameObject bullet = Instantiate(ArrowPrefab, transform.position, Quaternion.identity);
+            //push the bullet in the direction of the mouse
+            //destination (mousePosition) - starting position (transform.position)
+            Vector3 mouseDir = mousePos - transform.position;
+            mouseDir.Normalize();
+            bullet.GetComponent<Rigidbody>().linearVelocity = mouseDir * shootSpeed;
+            Destroy(bullet, ArrowLifetime);
+        }
+    }
+    public void OnToggle3(InputValue value)
+    {
+        //this function will run whenever the 1 key is presseed
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Debug.Log("Sword Attack");
+            Vector3 mousePos = Input.mousePosition;
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            Debug.Log(mousePos);
+            mousePos.z = 0;
+            //spawn a bullet
+            GameObject bullet = Instantiate(SwordPrefab, transform.position, Quaternion.identity);
+            //push the bullet in the direction of the mouse
+            //destination (mousePosition) - starting position (transform.position)
+            Vector3 mouseDir = mousePos - transform.position;
+            mouseDir.Normalize();
+            bullet.GetComponent<Rigidbody>().linearVelocity = mouseDir * SwingSpeed;
+            Destroy(bullet, SwingLifetime);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("1"))
-        {
-            SpellMode = false;
-            BowMode = false;
-            SwordMode = true;
-        }
-        if (Input.GetButtonDown("2"))
-        {
-            SpellMode = false;
-            BowMode = true;
-            SwordMode = false;
-        }
-        if (Input.GetButtonDown("3"))
-        {
-            SpellMode = true;
-            BowMode = false;
-            SwordMode = false;
-        }
-        if (Input.GetButtonDown("Fire1"))
-        {
-            if (SpellMode)
-            {
-
-                Debug.Log("Spell Attack");
-                Vector3 mousePos = Input.mousePosition;
-                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-                Debug.Log(mousePos);
-                mousePos.z = 0;
-                //spawn a bullet
-                GameObject bullet = Instantiate(SpellcastPrefab, transform.position, Quaternion.identity);
-                //push the bullet in the direction of the mouse
-                //destination (mousePosition) - starting position (transform.position)
-                Vector3 mouseDir = mousePos - transform.position;
-                mouseDir.Normalize();
-                bullet.GetComponent<Rigidbody>().linearVelocity = mouseDir * SpellTravelSpeed;
-                Destroy(bullet, SpellLifetime);
-
-            }
-            else if (BowMode)
-            {
-                Vector3 mousePos = Input.mousePosition;
-                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-                Debug.Log(mousePos);
-                mousePos.z = 0;
-                //spawn a bullet
-                GameObject bullet = Instantiate(ArrowPrefab, transform.position, Quaternion.identity);
-                //push the bullet in the direction of the mouse
-                //destination (mousePosition) - starting position (transform.position)
-                Vector3 mouseDir = mousePos - transform.position;
-                mouseDir.Normalize();
-                bullet.GetComponent<Rigidbody>().linearVelocity = mouseDir * shootSpeed;
-                Destroy(bullet, SpellLifetime);
-            }
-            else if (SwordMode)
-            {
-                Debug.Log("Sword Attack");
-                Vector3 mousePos = Input.mousePosition;
-                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-                Debug.Log(mousePos);
-                mousePos.z = 0;
-                //spawn a bullet
-                GameObject bullet = Instantiate(SwordPrefab, transform.position, Quaternion.identity);
-                //push the bullet in the direction of the mouse
-                //destination (mousePosition) - starting position (transform.position)
-                Vector3 mouseDir = mousePos - transform.position;
-                mouseDir.Normalize();
-                bullet.GetComponent<Rigidbody>().linearVelocity = mouseDir * SwingSpeed;
-                Destroy(bullet, SwingLifetime);
-            }
+        
+        
         }
     }
-}
+
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
