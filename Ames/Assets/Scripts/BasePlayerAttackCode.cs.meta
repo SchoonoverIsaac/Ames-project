@@ -1,2 +1,14 @@
 fileFormatVersion: 2
 guid: bc6ebb70c68b79347a566a163f32f668
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - SwordPrefab: {fileID: 6875216259417976744, guid: 9e4b58b9246ec524fa38e2aabe42a197, type: 3}
+  - SpellcastPrefab: {fileID: 6125132068759460540, guid: d2569003c1848c542b63cb184d22b5c8, type: 3}
+  - ArrowPrefab: {fileID: 3915511836850733934, guid: fca54101a91728749a778c09f226006c, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
