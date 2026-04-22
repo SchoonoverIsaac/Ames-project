@@ -33,5 +33,13 @@ public class PlayerShoot : MonoBehaviour
             bullet.GetComponent<Rigidbody>().linearVelocity = mouseDir * shootSpeed;
             Destroy(bullet, bulletLifetime);
         }
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GetComponent<Animator>().SetBool("BowAim", true);
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("BowAim", false);
+        }
     }
 }
