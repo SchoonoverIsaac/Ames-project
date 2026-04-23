@@ -45,5 +45,13 @@ public class RaycastShoot : MonoBehaviour
                 Destroy(bullet, bulletLifetime);
             }
         }
+        if (value.isPressed)
+        {
+            GetComponent<Animator>().SetBool("BowAim", true);
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("BowAim", false);
+        }
     }
 }
