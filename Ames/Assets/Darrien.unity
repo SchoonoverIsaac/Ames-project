@@ -417,11 +417,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &870807953 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 453084650579209855, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+  m_PrefabInstance: {fileID: 1342859785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &893294932 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 937451010987979973, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
   m_PrefabInstance: {fileID: 1342859785}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &893294938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870807953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40ce759f4d526f4a88919c8eface1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RaycastShoot
+  action: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  projectileShoot: 1
+  prefab: {fileID: 0}
+  spawnPosition: {fileID: 1163135145}
+  shootSpeed: 5
+  bulletLifetime: 10
 --- !u!1001 &1072066718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -509,6 +532,11 @@ PrefabInstance:
 --- !u!1 &1163135144 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 325a2a491cd9b0c418567161a04f6c16, type: 3}
+  m_PrefabInstance: {fileID: 75253179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1163135145 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 325a2a491cd9b0c418567161a04f6c16, type: 3}
   m_PrefabInstance: {fileID: 75253179}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &1163135146
@@ -637,7 +665,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 937451010987979973, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1693196510}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 453084650579209855, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 893294938}
   m_SourcePrefab: {fileID: 100100000, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
 --- !u!1 &1552426211
 GameObject:
