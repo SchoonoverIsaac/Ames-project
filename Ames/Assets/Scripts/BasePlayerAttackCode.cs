@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class BasePlayerAttackCode : MonoBehaviour
 {
@@ -20,11 +21,23 @@ public class BasePlayerAttackCode : MonoBehaviour
     public GameObject prefab;
     public Transform spawnPosition;
     public float bulletLifetime = 10;
-
+    public float maxStamina = 100f;
+    public float staminaDrainRate = 10f;
+    public float staminaRechargeRate = 5f;
+    public float maxMana = 100f;
+    public float manaDrainRate = 10f;
+    public float manaRechargeRate = 5f;
+    private float currentStamina;
+    private float currentMana;
+    public Image StaminaBar;
+    public Image ManaBar;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        currentStamina = maxStamina;
+        StaminaBar.fillAmount = currentStamina / maxStamina;
+        currentMana = maxMana;
+        ManaBar.fillAmount = currentMana / maxMana;
     }
     public void OnToggle1(InputValue value)
     {
