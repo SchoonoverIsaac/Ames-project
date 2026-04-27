@@ -68,7 +68,7 @@ public class BasePlayerAttackCode : MonoBehaviour
                         if (hit.collider.gameObject.GetComponent<EnemyHealth>() != null)
                         {
                             hit.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(1);
-                        }
+                        }  
                     }
                 }
                 else
