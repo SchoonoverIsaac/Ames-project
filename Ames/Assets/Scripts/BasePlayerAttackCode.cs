@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class BasePlayerAttackCode : MonoBehaviour
 {
@@ -20,11 +21,23 @@ public class BasePlayerAttackCode : MonoBehaviour
     public GameObject prefab;
     public Transform spawnPosition;
     public float bulletLifetime = 10;
-
+    public float maxStamina = 100f;
+    public float staminaDrainRate = 10f;
+    public float staminaRechargeRate = 5f;
+    public float maxMana = 100f;
+    public float manaDrainRate = 10f;
+    public float manaRechargeRate = 5f;
+    private float currentStamina;
+    private float currentMana;
+    public Image StaminaBar;
+    public Image ManaBar;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        currentStamina = maxStamina;
+        StaminaBar.fillAmount = currentStamina / maxStamina;
+        currentMana = maxMana;
+        ManaBar.fillAmount = currentMana / maxMana;
     }
     public void OnToggle1(InputValue value)
     {
@@ -32,6 +45,7 @@ public class BasePlayerAttackCode : MonoBehaviour
         SpellMode = false;
         BowMode = false;
         SwordMode = true;
+
 
     }
 
@@ -45,6 +59,8 @@ public class BasePlayerAttackCode : MonoBehaviour
                 //first cast the ray out from the camera, in the way it is looking
                 //this variable will store info of what we hit, if anything
                 RaycastHit hit;
+                currentMana -= 25;
+                currentStamina -= 5;
                 Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
                 //if we hit something, tell me what we hit
                 if (Physics.Raycast(ray, out hit, 10) && !projectileShoot)
@@ -52,10 +68,11 @@ public class BasePlayerAttackCode : MonoBehaviour
                     if (hit.collider != null)
                     {
                         Debug.Log(hit.collider.gameObject.name);
+                        
                         if (hit.collider.gameObject.GetComponent<EnemyHealth>() != null)
                         {
                             hit.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(1);
-                        }
+                        }  
                     }
                 }
                 else
@@ -79,6 +96,7 @@ public class BasePlayerAttackCode : MonoBehaviour
                     //first cast the ray out from the camera, in the way it is looking
                     //this variable will store info of what we hit, if anything
                     RaycastHit hit2;
+                    currentStamina -= 20;
                     Ray ray2 = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
                     //if we hit something, tell me what we hit
                     if (Physics.Raycast(ray2, out hit2, 10) && !projectileShoot)
@@ -112,6 +130,7 @@ public class BasePlayerAttackCode : MonoBehaviour
                         //first cast the ray out from the camera, in the way it is looking
                         //this variable will store info of what we hit, if anything
                         RaycastHit hit1;
+                        currentStamina -= 15;
                         Ray ray1 = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
                         //if we hit something, tell me what we hit
                         if (Physics.Raycast(ray1, out hit1, 10) && !projectileShoot)

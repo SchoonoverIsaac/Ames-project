@@ -120,6 +120,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 6b911390c5825014e8377183a7837d3f, type: 2}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: MoveSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: SprintSpeed
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
@@ -177,7 +185,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9101739593211324028}
+      addedObject: {fileID: 6738042453809082151}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 315867980103922027}
   m_SourcePrefab: {fileID: 100100000, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
 --- !u!4 &1102235005507284656 stripped
 Transform:
@@ -189,7 +200,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
   m_PrefabInstance: {fileID: 3902767032854704568}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9101739593211324028
+--- !u!114 &6738042453809082151
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,15 +209,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 4737214856216106988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b40ce759f4d526f4a88919c8eface1c3, type: 3}
+  m_Script: {fileID: 11500000, guid: bc6ebb70c68b79347a566a163f32f668, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RaycastShoot
-  action: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::BasePlayerAttackCode
+  SpellMode: 0
+  BowMode: 0
+  SwordMode: 1
+  SwordPrefab: {fileID: 6875216259417976744, guid: 9e4b58b9246ec524fa38e2aabe42a197, type: 3}
+  SwingSpeed: 0.1
+  SwingLifetime: 2
+  SpellcastPrefab: {fileID: 6125132068759460540, guid: d2569003c1848c542b63cb184d22b5c8, type: 3}
+  SpellTravelSpeed: 10
+  SpellLifetime: 2
+  ArrowPrefab: {fileID: 3915511836850733934, guid: fca54101a91728749a778c09f226006c, type: 3}
+  shootSpeed: 10
+  ArrowLifetime: 2
   projectileShoot: 1
   prefab: {fileID: 0}
   spawnPosition: {fileID: 0}
-  shootSpeed: 5
   bulletLifetime: 10
+  maxStamina: 100
+  staminaDrainRate: 10
+  staminaRechargeRate: 5
+  maxMana: 100
+  manaDrainRate: 10
+  manaRechargeRate: 5
+  StaminaBar: {fileID: 0}
+  ManaBar: {fileID: 0}
+--- !u!114 &315867980103922027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4737214856216106988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5fba29d5daf3914b91588ba08e123ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  health: 10
+  healthBar: {fileID: 0}
 --- !u!4 &5401548218817744214 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
@@ -230,15 +273,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.210217
+      value: -22.210205
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.161318
+      value: 10.161317
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.948788
+      value: -23.948792
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalRotation.w
