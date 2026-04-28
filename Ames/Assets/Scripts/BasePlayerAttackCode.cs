@@ -46,6 +46,7 @@ public class BasePlayerAttackCode : MonoBehaviour
         BowMode = false;
         SwordMode = true;
 
+
     }
 
     public void OnShoot(InputValue value)
@@ -58,6 +59,8 @@ public class BasePlayerAttackCode : MonoBehaviour
                 //first cast the ray out from the camera, in the way it is looking
                 //this variable will store info of what we hit, if anything
                 RaycastHit hit;
+                currentMana -= 25;
+                currentStamina -= 5;
                 Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
                 //if we hit something, tell me what we hit
                 if (Physics.Raycast(ray, out hit, 10) && !projectileShoot)
@@ -65,6 +68,7 @@ public class BasePlayerAttackCode : MonoBehaviour
                     if (hit.collider != null)
                     {
                         Debug.Log(hit.collider.gameObject.name);
+                        
                         if (hit.collider.gameObject.GetComponent<EnemyHealth>() != null)
                         {
                             hit.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(1);
@@ -92,6 +96,7 @@ public class BasePlayerAttackCode : MonoBehaviour
                     //first cast the ray out from the camera, in the way it is looking
                     //this variable will store info of what we hit, if anything
                     RaycastHit hit2;
+                    currentStamina -= 20;
                     Ray ray2 = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
                     //if we hit something, tell me what we hit
                     if (Physics.Raycast(ray2, out hit2, 10) && !projectileShoot)
@@ -125,6 +130,7 @@ public class BasePlayerAttackCode : MonoBehaviour
                         //first cast the ray out from the camera, in the way it is looking
                         //this variable will store info of what we hit, if anything
                         RaycastHit hit1;
+                        currentStamina -= 15;
                         Ray ray1 = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
                         //if we hit something, tell me what we hit
                         if (Physics.Raycast(ray1, out hit1, 10) && !projectileShoot)
