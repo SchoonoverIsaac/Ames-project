@@ -16,7 +16,9 @@ public class BasePlayerAttackCode : MonoBehaviour
     public GameObject ArrowPrefab;
     public float shootSpeed = 10f;
     public float ArrowLifetime = 2f;
-
+    public bool SpellShoot = true;
+    public bool SwordShoot = true;
+    public bool BowShoot = true;
     public bool projectileShoot = true;
     public GameObject prefab;
     public Transform spawnPosition;
@@ -63,7 +65,7 @@ public class BasePlayerAttackCode : MonoBehaviour
                 currentStamina -= 5;
                 Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
                 //if we hit something, tell me what we hit
-                if (Physics.Raycast(ray, out hit, 10) && !projectileShoot)
+                if (Physics.Raycast(ray, out hit, 10) && !SpellShoot)
                 {
                     if (hit.collider != null)
                     {
@@ -99,7 +101,7 @@ public class BasePlayerAttackCode : MonoBehaviour
                     currentStamina -= 20;
                     Ray ray2 = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
                     //if we hit something, tell me what we hit
-                    if (Physics.Raycast(ray2, out hit2, 10) && !projectileShoot)
+                    if (Physics.Raycast(ray2, out hit2, 10) && !SwordShoot)
                     {
                         if (hit2.collider != null)
                         {
@@ -133,7 +135,7 @@ public class BasePlayerAttackCode : MonoBehaviour
                         currentStamina -= 15;
                         Ray ray1 = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
                         //if we hit something, tell me what we hit
-                        if (Physics.Raycast(ray1, out hit1, 10) && !projectileShoot)
+                        if (Physics.Raycast(ray1, out hit1, 10) && !BowShoot)
                         {
                             if (hit1.collider != null)
                             {

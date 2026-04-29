@@ -42,7 +42,7 @@ public class RaycastShoot : MonoBehaviour
                 Vector3 velocity = dest - spawnPosition.position;
                 velocity.Normalize();
                 bullet.GetComponent<Rigidbody>().linearVelocity = velocity * shootSpeed;
-                Destroy(bullet, bulletLifetime);
+                Destroy(bullet, bulletLifetime); 
             }
         }
         if (value.isPressed)
