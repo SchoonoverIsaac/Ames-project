@@ -4,23 +4,32 @@ using UnityEngine.UI;
 
 public class BasePlayerAttackCode : MonoBehaviour
 {
+
+    public GameObject SwordPrefab;
+    public GameObject SpellcastPrefab;
+    public GameObject ArrowPrefab;
+    public GameObject prefab;
+
     public bool SpellMode = false;
     public bool BowMode = false;
     public bool SwordMode = true;
-    public GameObject SwordPrefab;
+    
     public float SwingSpeed = 0.1f;
     public float SwingLifetime = 2f;
-    public GameObject SpellcastPrefab;
+
     public float SpellTravelSpeed = 10f;
     public float SpellLifetime = 2f;
-    public GameObject ArrowPrefab;
+    
     public float shootSpeed = 10f;
     public float ArrowLifetime = 2f;
+
+
     public bool SpellShoot = true;
     public bool SwordShoot = true;
     public bool BowShoot = true;
     public bool projectileShoot = true;
-    public GameObject prefab;
+
+   
     public Transform spawnPosition;
     public float bulletLifetime = 10;
     public float maxStamina = 100f;
@@ -43,6 +52,7 @@ public class BasePlayerAttackCode : MonoBehaviour
     }
     public void OnToggle1(InputValue value)
     {
+        Debug.Log("Sword Mode Activated");
         //this function will run whenever the 1 key is presseed
         SpellMode = false;
         BowMode = false;
@@ -61,6 +71,8 @@ public class BasePlayerAttackCode : MonoBehaviour
                 //first cast the ray out from the camera, in the way it is looking
                 //this variable will store info of what we hit, if anything
                 RaycastHit hit;
+                Debug.Log("currentMana: " + currentMana);
+                Debug.Log("currentStamina: " + currentStamina);
                 currentMana -= 25;
                 currentStamina -= 5;
                 Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
@@ -71,6 +83,7 @@ public class BasePlayerAttackCode : MonoBehaviour
                     {
                         Debug.Log(hit.collider.gameObject.name);
                         
+
                         if (hit.collider.gameObject.GetComponent<EnemyHealth>() != null)
                         {
                             hit.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(1);
@@ -86,11 +99,11 @@ public class BasePlayerAttackCode : MonoBehaviour
                     {
                         dest = Camera.main.transform.position + Camera.main.transform.forward * SpellTravelSpeed;
                     }
-                    GameObject SpellcastPrefab = Instantiate(prefab, spawnPosition.position, Quaternion.identity);
+                    GameObject pf = Instantiate(SpellcastPrefab, spawnPosition.position, Quaternion.identity);
                     Vector3 velocity = dest - spawnPosition.position;
                     velocity.Normalize();
-                    SpellcastPrefab.GetComponent<Rigidbody>().linearVelocity = velocity * SpellTravelSpeed;
-                    Destroy(SpellcastPrefab, SpellLifetime);
+                    pf.GetComponent<Rigidbody>().linearVelocity = velocity * SpellTravelSpeed;
+                    Destroy(pf, SpellLifetime);
                 }
 
                 if (SwordMode == true)
@@ -116,12 +129,12 @@ public class BasePlayerAttackCode : MonoBehaviour
                     {
                         //this is where we want to spawn the projectile
                         //our preferred destination will be the point where our raycast hits
-                        Vector3 dest = hit.point;
-                        if (hit.collider == null)
+                        Vector3 dest = hit2.point;
+                        if (hit2.collider == null)
                         {
                             dest = Camera.main.transform.position + Camera.main.transform.forward * SwingSpeed;
                         }
-                        GameObject SwordPrefab = Instantiate(prefab, spawnPosition.position, Quaternion.identity);
+                        GameObject swp = Instantiate(SwordPrefab, spawnPosition.position, Quaternion.identity);
                         Vector3 velocity = dest - spawnPosition.position;
                         velocity.Normalize();
                         SwordPrefab.GetComponent<Rigidbody>().linearVelocity = velocity * SwingSpeed;
@@ -150,12 +163,12 @@ public class BasePlayerAttackCode : MonoBehaviour
                         {
                             //this is where we want to spawn the projectile
                             //our preferred destination will be the point where our raycast hits
-                            Vector3 dest = hit.point;
-                            if (hit.collider == null)
+                            Vector3 dest = hit1.point;
+                            if (hit1.collider == null)
                             {
                                 dest = Camera.main.transform.position + Camera.main.transform.forward * shootSpeed;
                             }
-                            GameObject ArrowPrefab = Instantiate(prefab, spawnPosition.position, Quaternion.identity);
+                            GameObject ap = Instantiate(ArrowPrefab, spawnPosition.position, Quaternion.identity);
                             Vector3 velocity = dest - spawnPosition.position;
                             velocity.Normalize();
                             ArrowPrefab.GetComponent<Rigidbody>().linearVelocity = velocity * shootSpeed;
@@ -174,14 +187,16 @@ public class BasePlayerAttackCode : MonoBehaviour
             
     public void OnToggle2(InputValue value)
     {
-        //this function will run whenever the 1 key is presseed
+        //this function will run whenever the 2 key is presseed
+        Debug.Log("Bow Mode Activated");
         SpellMode = false;
         BowMode = true;
         SwordMode = false;
     }
     public void OnToggle3(InputValue value)
     {
-        //this function will run whenever the 1 key is presseed
+        Debug.Log("Spell Mode Activated");
+        //this function will run whenever the 3 key is presseed
         SpellMode = true;
         BowMode = false;
         SwordMode = false;
