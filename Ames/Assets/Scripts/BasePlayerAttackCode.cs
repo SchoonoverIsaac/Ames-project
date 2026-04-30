@@ -52,6 +52,7 @@ public class BasePlayerAttackCode : MonoBehaviour
     }
     public void OnToggle1(InputValue value)
     {
+        Debug.Log("Sword Mode Activated");
         //this function will run whenever the 1 key is presseed
         SpellMode = false;
         BowMode = false;
@@ -70,6 +71,8 @@ public class BasePlayerAttackCode : MonoBehaviour
                 //first cast the ray out from the camera, in the way it is looking
                 //this variable will store info of what we hit, if anything
                 RaycastHit hit;
+                Debug.Log("currentMana: " + currentMana);
+                Debug.Log("currentStamina: " + currentStamina);
                 currentMana -= 25;
                 currentStamina -= 5;
                 Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
@@ -80,6 +83,7 @@ public class BasePlayerAttackCode : MonoBehaviour
                     {
                         Debug.Log(hit.collider.gameObject.name);
                         
+
                         if (hit.collider.gameObject.GetComponent<EnemyHealth>() != null)
                         {
                             hit.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(1);
@@ -125,8 +129,8 @@ public class BasePlayerAttackCode : MonoBehaviour
                     {
                         //this is where we want to spawn the projectile
                         //our preferred destination will be the point where our raycast hits
-                        Vector3 dest = hit.point;
-                        if (hit.collider == null)
+                        Vector3 dest = hit2.point;
+                        if (hit2.collider == null)
                         {
                             dest = Camera.main.transform.position + Camera.main.transform.forward * SwingSpeed;
                         }
@@ -159,8 +163,8 @@ public class BasePlayerAttackCode : MonoBehaviour
                         {
                             //this is where we want to spawn the projectile
                             //our preferred destination will be the point where our raycast hits
-                            Vector3 dest = hit.point;
-                            if (hit.collider == null)
+                            Vector3 dest = hit1.point;
+                            if (hit1.collider == null)
                             {
                                 dest = Camera.main.transform.position + Camera.main.transform.forward * shootSpeed;
                             }
@@ -183,14 +187,16 @@ public class BasePlayerAttackCode : MonoBehaviour
             
     public void OnToggle2(InputValue value)
     {
-        //this function will run whenever the 1 key is presseed
+        //this function will run whenever the 2 key is presseed
+        Debug.Log("Bow Mode Activated");
         SpellMode = false;
         BowMode = true;
         SwordMode = false;
     }
     public void OnToggle3(InputValue value)
     {
-        //this function will run whenever the 1 key is presseed
+        Debug.Log("Spell Mode Activated");
+        //this function will run whenever the 3 key is presseed
         SpellMode = true;
         BowMode = false;
         SwordMode = false;
