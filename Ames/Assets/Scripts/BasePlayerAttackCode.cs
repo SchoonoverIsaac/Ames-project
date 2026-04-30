@@ -137,8 +137,8 @@ public class BasePlayerAttackCode : MonoBehaviour
                         GameObject swp = Instantiate(SwordPrefab, spawnPosition.position, Quaternion.identity);
                         Vector3 velocity = dest - spawnPosition.position;
                         velocity.Normalize();
-                        SwordPrefab.GetComponent<Rigidbody>().linearVelocity = velocity * SwingSpeed;
-                        Destroy(SwordPrefab, SwingLifetime);
+                        swp.GetComponent<Rigidbody>().linearVelocity = velocity * SwingSpeed;
+                        Destroy(swp, SwingLifetime);
                     }
                     if (BowMode == true)
                     {
@@ -171,8 +171,8 @@ public class BasePlayerAttackCode : MonoBehaviour
                             GameObject ap = Instantiate(ArrowPrefab, spawnPosition.position, Quaternion.identity);
                             Vector3 velocity = dest - spawnPosition.position;
                             velocity.Normalize();
-                            ArrowPrefab.GetComponent<Rigidbody>().linearVelocity = velocity * shootSpeed;
-                            Destroy(ArrowPrefab, ArrowLifetime);
+                            ap.GetComponent<Rigidbody>().linearVelocity = velocity * shootSpeed;
+                            Destroy(ap, ArrowLifetime);
                         }
                     }
                 }
