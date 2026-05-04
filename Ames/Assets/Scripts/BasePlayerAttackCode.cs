@@ -106,75 +106,77 @@ public class BasePlayerAttackCode : MonoBehaviour
                     Destroy(pf, SpellLifetime);
                 }
 
-                if (SwordMode == true)
+      
+            }
+            if (SwordMode == true)
+            {
+                //first cast the ray out from the camera, in the way it is looking
+                //this variable will store info of what we hit, if anything
+                RaycastHit hit2;
+                currentStamina -= 20;
+                Ray ray2 = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+                //if we hit something, tell me what we hit
+                if (Physics.Raycast(ray2, out hit2, 10) && !SwordShoot)
                 {
-                    //first cast the ray out from the camera, in the way it is looking
-                    //this variable will store info of what we hit, if anything
-                    RaycastHit hit2;
-                    currentStamina -= 20;
-                    Ray ray2 = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-                    //if we hit something, tell me what we hit
-                    if (Physics.Raycast(ray2, out hit2, 10) && !SwordShoot)
+                    if (hit2.collider != null)
                     {
-                        if (hit2.collider != null)
+                        Debug.Log(hit2.collider.gameObject.name);
+                        if (hit2.collider.gameObject.GetComponent<EnemyHealth>() != null)
                         {
-                            Debug.Log(hit2.collider.gameObject.name);
-                            if (hit2.collider.gameObject.GetComponent<EnemyHealth>() != null)
-                            {
-                                hit2.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(1);
-                            }
+                            hit2.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(1);
                         }
                     }
-                    else
+                }
+                else
+                {
+                    //this is where we want to spawn the projectile
+                    //our preferred destination will be the point where our raycast hits
+                    Vector3 dest = hit2.point;
+                    if (hit2.collider == null)
                     {
-                        //this is where we want to spawn the projectile
-                        //our preferred destination will be the point where our raycast hits
-                        Vector3 dest = hit2.point;
-                        if (hit2.collider == null)
-                        {
-                            dest = Camera.main.transform.position + Camera.main.transform.forward * SwingSpeed;
-                        }
-                        GameObject swp = Instantiate(SwordPrefab, spawnPosition.position, Quaternion.identity);
-                        Vector3 velocity = dest - spawnPosition.position;
-                        velocity.Normalize();
-                        swp.GetComponent<Rigidbody>().linearVelocity = velocity * SwingSpeed;
-                        Destroy(swp, SwingLifetime);
+                        dest = Camera.main.transform.position + Camera.main.transform.forward * SwingSpeed;
                     }
-                    if (BowMode == true)
+                    GameObject swp = Instantiate(SwordPrefab, spawnPosition.position, Quaternion.identity);
+                    Vector3 velocity = dest - spawnPosition.position;
+                    velocity.Normalize();
+                    swp.GetComponent<Rigidbody>().linearVelocity = velocity * SwingSpeed;
+                    Destroy(swp, SwingLifetime);
+                }
+              
+            }
+            if (BowMode == true)
+            {
+                //first cast the ray out from the camera, in the way it is looking
+                //this variable will store info of what we hit, if anything
+                RaycastHit hit1;
+                currentStamina -= 15;
+                Ray ray1 = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+                //if we hit something, tell me what we hit
+                if (Physics.Raycast(ray1, out hit1, 10) && !BowShoot)
+                {
+                    if (hit1.collider != null)
                     {
-                        //first cast the ray out from the camera, in the way it is looking
-                        //this variable will store info of what we hit, if anything
-                        RaycastHit hit1;
-                        currentStamina -= 15;
-                        Ray ray1 = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-                        //if we hit something, tell me what we hit
-                        if (Physics.Raycast(ray1, out hit1, 10) && !BowShoot)
+                        Debug.Log(hit1.collider.gameObject.name);
+                        if (hit1.collider.gameObject.GetComponent<EnemyHealth>() != null)
                         {
-                            if (hit1.collider != null)
-                            {
-                                Debug.Log(hit1.collider.gameObject.name);
-                                if (hit1.collider.gameObject.GetComponent<EnemyHealth>() != null)
-                                {
-                                    hit1.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(1);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            //this is where we want to spawn the projectile
-                            //our preferred destination will be the point where our raycast hits
-                            Vector3 dest = hit1.point;
-                            if (hit1.collider == null)
-                            {
-                                dest = Camera.main.transform.position + Camera.main.transform.forward * shootSpeed;
-                            }
-                            GameObject ap = Instantiate(ArrowPrefab, spawnPosition.position, Quaternion.identity);
-                            Vector3 velocity = dest - spawnPosition.position;
-                            velocity.Normalize();
-                            ap.GetComponent<Rigidbody>().linearVelocity = velocity * shootSpeed;
-                            Destroy(ap, ArrowLifetime);
+                            hit1.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(1);
                         }
                     }
+                }
+                else
+                {
+                    //this is where we want to spawn the projectile
+                    //our preferred destination will be the point where our raycast hits
+                    Vector3 dest = hit1.point;
+                    if (hit1.collider == null)
+                    {
+                        dest = Camera.main.transform.position + Camera.main.transform.forward * shootSpeed;
+                    }
+                    GameObject ap = Instantiate(ArrowPrefab, spawnPosition.position, Quaternion.identity);
+                    Vector3 velocity = dest - spawnPosition.position;
+                    velocity.Normalize();
+                    ap.GetComponent<Rigidbody>().linearVelocity = velocity * shootSpeed;
+                    Destroy(ap, ArrowLifetime);
                 }
             }
         }
